@@ -40,7 +40,7 @@ class I2CDevice:
         if probe:
             self.__probe_for_device()
             
-    def readinto(self, buf, *, start=0, end=None):    #Function to read the data from the I2C device. The data will be put into
+    def readinto(self, buf, start=0, end=None):    #Function to read the data from the I2C device. The data will be put into
         if end is None:                               #the variable speciified by the calling rrutine.
             end = len(buf)                            #The buffer ssould be a bytearray. So to call we might use:
         try:                                                      #data = byetarray()
@@ -49,7 +49,7 @@ class I2CDevice:
         except OSError:
             self.i2c_error = -2                       #if an error occurs on the bus then device.i2c_error is set to -2
     
-    def write(self, buf, *, start=0, end=None):       #Function to write data to the I2C device. 
+    def write(self, buf, start=0, end=None):       #Function to write data to the I2C device. 
         if end is None:                               #put the data you wish to send in bytearray and call device.write, for example,
             end = len(buf)                                            #message = "hello"
         try:                                                          #data = bytearray(message)
@@ -61,8 +61,7 @@ class I2CDevice:
         self,                                         #This may be useful if a device requires a command before sending the correct data.
         out_buffer,                                   #the command would be put in the out_buffer and is received into in_buffer.
         in_buffer,                                    #If delay is omitted then the default delay of 0s is used.
-        delay = 0,
-        *,                                            #In and out valuese can be used to slice the bytearray.
+        delay = 0,                                    #In and out valuese can be used to slice the bytearray.
         out_start=0,                                  #Example:
         out_end=None,                                             #cmd = "read"
         in_start=0,                                               #out_buf = bytearray(cmd)
