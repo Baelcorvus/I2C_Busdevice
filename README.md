@@ -58,7 +58,7 @@ Reading is done in a similar manner using device.readinto(buf):
 
 ```micropython
 inbuf = bytearray()
-sht.readinto{inbuf}
+sht.readinto(inbuf)
 print(inbuf)
 ```
 
