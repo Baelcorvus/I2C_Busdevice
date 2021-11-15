@@ -60,6 +60,7 @@ Reading is done in a similar manner using device.readinto(buf):
 inbuf = bytearray()
 sht.readinto{inbuf}
 print(inbuf)
+```
 
 In both these cases you can specify a start or an end value that slices the array for sending or receiving.
 ```micropython
