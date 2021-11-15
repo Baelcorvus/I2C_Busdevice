@@ -70,10 +70,10 @@ sht.write(outbuf, start=1, end=3)
 ```
 will send "ell" to the device.
 
-Also included is a function that writes to a devices, waits a designated time and then reads the decice all in one go.
-This is useful if the deevice requires a command to tell it which data to send.
+Also included is a function that writes to a device, waits a designated time and then reads the device all in one go.
+This is useful if the device requires a command to tell it which data to send.
 To use this use `device.write_then_readinto(outbuf, inbuf, delay)`
-This writes the output buffer to the device waits for delay(s) and then reads the input.
+This writes the output buffer to the device waits for delay (s) and then reads the input.
 
 ```micropython
 cmd = "temp"
@@ -84,7 +84,7 @@ sht.write_then_readinto(outbuf, inbuf, delay)
 ```
 
 This will write "temp" to the device, wait 0.4s and then read the device.
-The function also has out_start, out_end an in_start and in_end arguments if you require slicing of the data.
+The function also has out_start, out_end, in_start and in_end arguments if you require slicing of the data.
 The default delay time is 0s, so if no delay is required this can be omitted
 
 
@@ -98,13 +98,13 @@ So we can use:
 ```micropython
 sht = I2CDevice(i2c, addr)
 
-if (sht.device.i2c_error == 0):
+if (sht.i2c_error == 0):
     #device is present and working so read and write
 else:
-    print(sht.device.i2c_error, sht.device.i2c_error_device)
+    print(sht.i2c_error, sht.i2c_error_device)
     sht = I2CDevice(i2c, addr)
 ```
 
-This will check if the device is connected and if not moans about at and tries again to intialise it. 
+This will check if the device is connected and if not moans about it and tries again to intialise it. 
 
 An error in the bus (for example a line dropping out) will result in a value of -2 in the device.i2c_error.
