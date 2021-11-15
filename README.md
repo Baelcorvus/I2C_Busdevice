@@ -12,7 +12,7 @@ from I2C_bus_device import I2CDevice
 
 You then need to create a bus by defining which pins the I2C bus is connect to.
 
-```micropython
+```python
 sdaPIN=machine.Pin(0)
 sclPIN=machine.Pin(1)
 i2c_bus = 0
