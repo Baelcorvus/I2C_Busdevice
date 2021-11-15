@@ -52,8 +52,10 @@ So, for example, if we wish to send "hello" to the sht sensor we just created:
 data = "hello"
 outbuf = bytearray(data)
 sht.write(outbuf)
-``
+```
+
 Reading is done in a similar manner using device.readinto(buf):
+
 ```micropython
 inbuf = bytearray()
 sht.readinto{inbuf}
