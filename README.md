@@ -116,9 +116,5 @@ except OSError:
     device.write(data1)               #send the value of the button to the slave
 except OSError:                  #If there is a bus error, retry the connection
     print("device I/O error - retrying")
-    try:
-        device = I2CDevice(i2c, addr)
-    except OSError:
-        pass    
-```
+ ```
 This reads a value from the device, and if it receives an error retries the sensor.         
