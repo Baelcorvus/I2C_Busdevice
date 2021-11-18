@@ -15,8 +15,11 @@ i2c_bus = 0
 addr = 0x09
 
 i2c=machine.I2C(i2c_bus, sda=sdaPIN, scl=sclPIN, freq=400000)  #define the i2c bus
+try:
+    device = I2CDevice(i2c, addr)        #create the I2C device
+except OSError:
+    print ("slave not present at {}".format(addr))    
 
-device = I2CDevice(i2c, addr)        #create the I2C device
 
 led = machine.Pin(28, Pin.OUT)       #LED connected to pin 28
 led.low()
@@ -24,7 +27,7 @@ led.low()
 but2 = Pin(20, Pin.IN, Pin.PULL_UP)  #Button connected to pin 20
 
 while True:
-    if (device.i2c_error == 0):      #check the device error message. If device is present and the bus is working correctly this value will be 0
+    try:
         bytes_read = bytearray(1)
         device.readinto(bytes_read)  #read one byte from the slave
         button = bytes_read [0]        
@@ -35,8 +38,7 @@ while True:
         
         data1 = bytearray([but2.value()]) #aquire the state of the button and create a bytearray with this in it.
         device.write(data1)               #send the value of the button to the slave
-        
-    else:
-        print("no device")                                    #if the error bit is set then the bus has failed. 
-        print(device.i2c_error, device.i2c_error_device)      #print the error number and the device it waas trying to commincate with
-        device = I2CDevice(i2c, addr)                         #reinitialise the device to check it again
+    except OSError:                  #If there is a bus error, retry the connection
+         print("device I/O error - retrying")
+         device = I2CDevice(i2c, addr)
+    sleep(0.1)
