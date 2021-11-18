@@ -97,7 +97,7 @@ For example:
 Try:
     tsl = TSL2591.TSL2591(i2c, lux_addr)
 except OSError:
-    ptint ("device not present")
+    print ("device not present")
 ```
  This will intialise a TSL2591 seonsor and report an error if it is not found.
 
